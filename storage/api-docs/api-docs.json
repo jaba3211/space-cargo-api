@@ -222,6 +222,83 @@
                 ]
             }
         },
+        "/api/parcels/update": {
+            "put": {
+                "tags": [
+                    "Parcels"
+                ],
+                "summary": "Create parcel",
+                "operationId": "fa51acd21a141231e6f2c7c6164ab40c",
+                "requestBody": {
+                    "description": "Data for creating a new parcel",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "numeric",
+                                        "example": "1"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "AC44BB13#TT"
+                                    },
+                                    "price": {
+                                        "type": "numeric",
+                                        "example": "12.33"
+                                    },
+                                    "quantity": {
+                                        "type": "numeric",
+                                        "example": "12"
+                                    },
+                                    "store_address": {
+                                        "type": "string",
+                                        "example": "test address"
+                                    },
+                                    "comment": {
+                                        "type": "string",
+                                        "example": "test comment"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [

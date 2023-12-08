@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Requests\LimitRequest;
 use Domains\Parcels\Requests\CreateParcelRequest;
+use Domains\Parcels\Requests\UpdateParcelRequest;
 use Domains\Parcels\Resources\ParcelResource;
 use Domains\Parcels\Resources\ParcelsCollection;
 use Domains\Parcels\Services\ParcelsService;
@@ -153,7 +154,7 @@ class ParcelsController extends ApiController
      * @return ParcelResource|JsonResponse
      */
     public function getParcel(
-        int   $id,
+        int            $id,
         ParcelsService $parcelsService
     ): ParcelResource|JsonResponse
     {
@@ -161,6 +162,68 @@ class ParcelsController extends ApiController
             $data = $parcelsService->getParcel(
                 userId: Auth::id(),
                 id: $id
+            );
+            return new ParcelResource($data);
+        } catch (Exception $exception) {
+            return $this->error($exception);
+        }
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/api/parcels/update",
+     *     tags={"Parcels"},
+     *     summary="Create parcel",
+     *     security={{"apiAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Data for creating a new parcel",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="numeric", example="1"),
+     *             @OA\Property(property="code", type="string", example="AC44BB13#TT"),
+     *             @OA\Property(property="price", type="numeric", example="12.33"),
+     *             @OA\Property(property="quantity", type="numeric", example="12"),
+     *             @OA\Property(property="store_address", type="string", example="test address"),
+     *             @OA\Property(property="comment", type="string", example="test comment"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Created",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     *
+     * Create a new parcels.
+     *
+     * @param UpdateParcelRequest $request
+     * @param ParcelsService $parcelsService
+     * @return ParcelResource|JsonResponse
+     */
+    public function update(
+        UpdateParcelRequest $request,
+        ParcelsService      $parcelsService
+    ): ParcelResource|JsonResponse
+    {
+        try {
+            $data = $parcelsService->update(
+                userId: Auth::id(),
+                id: $request->get('id'),
+                code: $request->get('code'),
+                price: $request->get('price'),
+                quantity: $request->get('quantity'),
+                storeAddress: $request->get('store_address'),
+                comment: $request->get('comment'),
             );
             return new ParcelResource($data);
         } catch (Exception $exception) {

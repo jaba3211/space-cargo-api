@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,9 +14,9 @@ return new class extends Migration
             $table->id();
             $table->string('code', 60)->unique();
             $table->string('price', 40);
-            $table->unsignedSmallInteger('quantity');
+            $table->unsignedSmallInteger('quantity')->nullable();
             $table->string('store_address');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

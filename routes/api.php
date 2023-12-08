@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('parcels')->group(function () {
         Route::get('/', [ParcelsController::class, 'getList']);
         Route::get('/{id}', [ParcelsController::class, 'getParcel']);
+        Route::put('/update', [ParcelsController::class, 'update']);
         Route::post('/create', [ParcelsController::class, 'create']);
     });
 });

@@ -2,6 +2,7 @@
 
 namespace Domains\Parcels\Services;
 
+use App\Exceptions\NotFoundException;
 use App\Services\BaseService;
 use Domains\Parcels\Queries\ParcelQuery;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -22,18 +23,18 @@ class ParcelsService extends BaseService
      * @param int $userId
      * @param string $code
      * @param string $price
-     * @param int $quantity
+     * @param int|null $quantity
      * @param string $storeAddress
-     * @param string $comment
+     * @param string|null $comment
      * @return mixed
      */
     public function create(
         int    $userId,
         string $code,
         string $price,
-        int    $quantity,
+        ?int    $quantity,
         string $storeAddress,
-        string $comment,
+        ?string $comment,
     ): mixed
     {
         return $this->parcelQuery->create(
@@ -62,6 +63,41 @@ class ParcelsService extends BaseService
     )
     {
         return $this->parcelQuery->getParcel($userId, $id);
+    }
+
+    /**
+     * @param int $userId
+     * @param int $id
+     * @param string $code
+     * @param string $price
+     * @param int|null $quantity
+     * @param string $storeAddress
+     * @param string|null $comment
+     * @return object
+     * @throws NotFoundException
+     */
+    public function update(
+        int    $userId,
+        int    $id,
+        string $code,
+        string $price,
+        ?int    $quantity,
+        string $storeAddress,
+        ?string $comment,
+    ): object
+    {
+        $parcel = $this->parcelQuery->getParcel(userId: $userId, id: $id);
+        if (!$parcel) {
+            throw new NotFoundException('The parcel not found.');
+        }
+        return $this->parcelQuery->update(
+            parcel: $parcel,
+            code: $code,
+            price: $price,
+            quantity: $quantity,
+            storeAddress: $storeAddress,
+            comment: $comment
+        );
     }
 
 }

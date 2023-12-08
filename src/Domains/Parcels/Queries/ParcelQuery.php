@@ -10,14 +10,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class ParcelQuery extends BaseQuery
 {
-
+    /**
+     * @param int $userId
+     * @param string $code
+     * @param string $price
+     * @param int|null $quantity
+     * @param string $storeAddress
+     * @param string|null $comment
+     * @return mixed
+     */
     public function create(
         int    $userId,
         string $code,
         string $price,
-        int    $quantity,
+        ?int    $quantity,
         string $storeAddress,
-        string $comment,
+        ?string $comment,
     )
     {
         return Parcel::create([
@@ -62,4 +70,33 @@ class ParcelQuery extends BaseQuery
             ->where('id', $id)
             ->first();
     }
+
+    /**
+     * @param Object $parcel
+     * @param string $code
+     * @param string $price
+     * @param int|null $quantity
+     * @param string $storeAddress
+     * @param string|null $comment
+     * @return Object
+     */
+    public function update(
+        Object $parcel,
+        string $code,
+        string $price,
+        ?int    $quantity,
+        string $storeAddress,
+        ?string $comment,
+    ): object
+    {
+        $parcel->update([
+            'code' => $code,
+            'price' => $price,
+            'quantity' => $quantity,
+            'store_address' => $storeAddress,
+            'comment' => $comment,
+        ]);
+        return $parcel;
+    }
+
 }

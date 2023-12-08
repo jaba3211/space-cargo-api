@@ -2,9 +2,10 @@
 
 namespace Domains\Parcels\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateParcelRequest extends FormRequest
+class UpdateParcelRequest extends FormRequest
 {
 
     /**
@@ -21,7 +22,13 @@ class CreateParcelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|string|max:60|unique:parcels',
+            'id' => 'required|numeric|exists:parcels,id',
+            'code' => [
+                'required',
+                'string',
+                'max:60',
+                Rule::unique('parcels')->ignore($this->request->get('id'))
+            ],
             'price' => 'required|numeric',
             'quantity' => 'nullable|numeric',
             'store_address' => 'required|string|max:255',
