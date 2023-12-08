@@ -21,7 +21,7 @@ class LoginService extends BaseService
         ]);
 
         if (!$token) {
-            throw new NotFoundException('Incorrect password.');
+            throw new NotFoundException('Incorrect username or password.');
         }
         return $this->respondWithToken($token);
     }
