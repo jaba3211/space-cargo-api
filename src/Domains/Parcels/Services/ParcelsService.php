@@ -2,12 +2,22 @@
 
 namespace Domains\Parcels\Services;
 
-use App\Models\Parcel;
 use App\Services\BaseService;
+use Domains\Parcels\Queries\ParcelQuery;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
 class ParcelsService extends BaseService
 {
+
+    private ParcelQuery $parcelQuery;
+
+    public function __construct(ParcelQuery $parcelQuery)
+    {
+        parent::__construct();
+        $this->parcelQuery = $parcelQuery;
+    }
+
     /**
      * @param int $userId
      * @param string $code
@@ -26,14 +36,32 @@ class ParcelsService extends BaseService
         string $comment,
     ): mixed
     {
-        return Parcel::create([
-            'user_id' => $userId,
-            'code' => $code,
-            'price' => $price,
-            'quantity' => $quantity,
-            'store_address' => $storeAddress,
-            'comment' => $comment,
-        ]);
+        return $this->parcelQuery->create(
+            userId: $userId,
+            code: $code,
+            price: $price,
+            quantity: $quantity,
+            storeAddress: $storeAddress,
+            comment: $comment
+        );
+    }
+
+    /**
+     * @param int $userId
+     * @param int $limit
+     * @return LengthAwarePaginator
+     */
+    public function getList(int $userId, int $limit): LengthAwarePaginator
+    {
+        return $this->parcelQuery->getList(userId: $userId, limit: $limit);
+    }
+
+    public function getParcel(
+        int $userId,
+        int $id,
+    )
+    {
+        return $this->parcelQuery->getParcel($userId, $id);
     }
 
 }

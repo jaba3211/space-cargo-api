@@ -21,6 +21,8 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('parcels')->group(function () {
+        Route::get('/', [ParcelsController::class, 'getList']);
+        Route::get('/{id}', [ParcelsController::class, 'getParcel']);
         Route::post('/create', [ParcelsController::class, 'create']);
     });
 });
