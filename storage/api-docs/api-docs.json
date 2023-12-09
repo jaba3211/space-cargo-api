@@ -22,7 +22,7 @@
                                     "username": {
                                         "type": "string",
                                         "format": "text",
-                                        "example": "testUserName"
+                                        "example": "glowe"
                                     },
                                     "password": {
                                         "type": "string",
@@ -297,20 +297,6 @@
                         "apiAuth": []
                     }
                 ]
-            }
-        },
-        "/api/users": {
-            "get": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Get a list of users",
-                "operationId": "20af7adfef3e7063b8a9dd7d20e5953c",
-                "responses": {
-                    "200": {
-                        "description": "List of users"
-                    }
-                }
             }
         }
     },

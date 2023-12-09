@@ -31,7 +31,7 @@ class AuthController extends ApiController
      *          description="Create customers object",
      *          required=true,
      *          @OA\JsonContent(
-     *		        @OA\Property(property="username", type="string", format="text", example="testUserName"),
+     *		        @OA\Property(property="username", type="string", format="text", example="glowe"),
      *			    @OA\Property(property="password", type="string", format="text", example="123456"),
      *            ),
      *      ),

@@ -12,9 +12,7 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->setName('testName')
-            ->setUserName('testUserName')
+        User::factory(5)
             ->setPassword('123456')
             ->create();
     }
