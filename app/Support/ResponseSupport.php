@@ -15,7 +15,9 @@ trait ResponseSupport
      */
     protected function unauthorized(Exception $e, $code = null): JsonResponse
     {
-        return response()->json(['message' => $e->getMessage() . '; file: ' . $e->getFile() . '; On line: ' . $e->getLine()], $code ?? Response::HTTP_UNAUTHORIZED);
+        return response()->json(
+            ['message' => $e->getMessage() . '; file: ' . $e->getFile() . '; On line: ' . $e->getLine()],
+            $code ?? Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -65,6 +67,17 @@ trait ResponseSupport
     protected function success($message = null): JsonResponse
     {
         return response()->json(['message' => $message], Response::HTTP_OK);
+    }
+
+
+    /**
+     * @param string $message
+     * @param int $code
+     * @return JsonResponse
+     */
+    protected function message(string $message, int $code): JsonResponse
+    {
+        return response()->json(['message' => $message], $code);
     }
 
     /**

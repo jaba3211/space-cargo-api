@@ -142,7 +142,7 @@
                     "Parcels"
                 ],
                 "summary": "Get a list of parcels",
-                "operationId": "08f6fde9d8ce3ec8d633e3d0e508de26",
+                "operationId": "bf49128fb3aadfb9392953384eb9b6f5",
                 "parameters": [
                     {
                         "name": "limit",
@@ -185,7 +185,7 @@
                     "Parcels"
                 ],
                 "summary": "Get a parcel",
-                "operationId": "77408daddc15df8919383a8c30739167",
+                "operationId": "0d8d9cad98d1f70bc3bda1bf2471c46d",
                 "parameters": [
                     {
                         "name": "id",

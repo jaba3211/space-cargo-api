@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('auth')->group(function () {
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('parcels')->group(function () {
-        Route::get('/', [ParcelsController::class, 'getList']);
-        Route::get('/{id}', [ParcelsController::class, 'getParcel']);
-        Route::put('/update', [ParcelsController::class, 'update']);
-        Route::post('/create', [ParcelsController::class, 'create']);
+        Route::get('/', [ParcelsController::class, 'index'])->name('parcels.index');
+        Route::get('/{id}', [ParcelsController::class, 'edit'])->name('parcels.edit');
+        Route::put('/update', [ParcelsController::class, 'update'])->name('parcels.update');
+        Route::post('/create', [ParcelsController::class, 'create'])->name('parcels.create');
     });
 });

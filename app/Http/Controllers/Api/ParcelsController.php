@@ -107,7 +107,7 @@ class ParcelsController extends ApiController
      * @param ParcelsService $parcelsService
      * @return AnonymousResourceCollection|JsonResponse
      */
-    public function getList(
+    public function index(
         LimitRequest   $request,
         ParcelsService $parcelsService
     ): AnonymousResourceCollection|JsonResponse
@@ -153,7 +153,7 @@ class ParcelsController extends ApiController
      * @param ParcelsService $parcelsService
      * @return ParcelResource|JsonResponse
      */
-    public function getParcel(
+    public function edit(
         int            $id,
         ParcelsService $parcelsService
     ): ParcelResource|JsonResponse
