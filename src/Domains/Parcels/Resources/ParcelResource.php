@@ -2,6 +2,7 @@
 
 namespace Domains\Parcels\Resources;
 
+use Exception;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ParcelResource extends JsonResource
@@ -10,7 +11,7 @@ class ParcelResource extends JsonResource
     /**
      * @param $request
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function toArray($request): array
     {

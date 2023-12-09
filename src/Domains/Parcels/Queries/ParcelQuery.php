@@ -26,7 +26,7 @@ class ParcelQuery extends BaseQuery
         ?int    $quantity,
         string $storeAddress,
         ?string $comment,
-    )
+    ): mixed
     {
         return Parcel::create([
             'user_id' => $userId,
